@@ -11,7 +11,7 @@ COPY src/index.js ./src/
 # Cài đặt các phụ thuộc của ứng dụng
 RUN rm -f package-lock.json
 RUN rm -rf node_modules
-RUN npm install -g npm@latest
+RUN npm install 
 
 # Hiển thị thông tin log khi có lỗi
 RUN ls -al /root/.npm/_logs
