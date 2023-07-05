@@ -14,6 +14,6 @@ RUN npm install
 # Mở cổng mà ứng dụng sử dụng (nếu có)
 EXPOSE 3000
 
-# Khởi chạy ứng dụng
+# Khởi chạy ứng dụng s
 CMD ["node", "index.js"]
 
