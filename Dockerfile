@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 
 # Copy tất cả các tệp cần thiết vào thư mục làm việc
 COPY package*.json ./
-COPY src/index.js ./
+COPY src/index.js ./src/
 
 # Cài đặt các phụ thuộc của ứng dụng
 RUN npm install
@@ -15,4 +15,4 @@ RUN npm install
 EXPOSE 3000
 
 # Khởi chạy ứng dụng
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]
