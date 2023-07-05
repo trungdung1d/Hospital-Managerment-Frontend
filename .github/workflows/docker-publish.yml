@@ -21,10 +21,10 @@ jobs:
       run: npm install
 
     - name: Build Docker image
-      run: docker build -t your-dockerhub-username/your-repo-name:latest .
+      run: docker build -t tuzuka/fontend:latest .
       
     - name: Log in to Docker Hub
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
     - name: Push Docker image
-      run: docker push your-dockerhub-username/your-repo-name:latest
+      run: docker push tuzuka/fontend:latest
