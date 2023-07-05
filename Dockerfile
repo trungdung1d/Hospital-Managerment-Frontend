@@ -1,5 +1,5 @@
 # Sử dụng một image có hỗ trợ Node.js
-FROM node:latest
+FROM node:14
 
 # Chọn thư mục làm thư mục làm việc trong container
 WORKDIR /usr/src/app
@@ -9,7 +9,9 @@ COPY package*.json ./
 COPY src/index.js ./src/
 
 # Cài đặt các phụ thuộc của ứng dụng
-RUN npm install
+RUN rm -f package-lock.json
+RUN rm -rf node_modules
+RUN npm install -g npm@latest
 
 # Hiển thị thông tin log khi có lỗi
 RUN ls -al /root/.npm/_logs
