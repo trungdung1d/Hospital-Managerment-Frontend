@@ -10,6 +10,9 @@ COPY package*.json ./
 # Cài đặt các dependencies
 RUN npm ci
 
+# Cập nhật cơ sở dữ liệu trình duyệt
+RUN npx browserslist@latest --update-db
+
 # Copy toàn bộ mã nguồn ứng dụng
 COPY . .
 
