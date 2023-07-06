@@ -20,7 +20,7 @@ COPY . .
 RUN npm run 
 
 # Sử dụng base image nginx nhẹ để chạy ứng dụng
-FROM nginx:alpine
+#FROM nginx:alpine
 
 # Copy các tệp tin cấu hình của nginx
 #COPY nginx.conf /etc/nginx/conf.d/default.conf
