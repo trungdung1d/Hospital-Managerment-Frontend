@@ -1,24 +1,32 @@
-# Sử dụng một image có hỗ trợ Node.js
-FROM node:14
+# Sử dụng base image của Node.js
+FROM node:14-alpine AS builder
 
-# Chọn thư mục làm thư mục làm việc trong container
-WORKDIR /usr/src/app
+# Đặt thư mục làm việc cho ứng dụng
+WORKDIR /app
 
-# Copy tất cả các tệp cần thiết vào thư mục làm việc
+# Copy package.json và package-lock.json
 COPY package*.json ./
-COPY src/index.js ./src/
 
-# Cài đặt các phụ thuộc của ứng dụng
-RUN rm -f package-lock.json
-RUN rm -rf node_modules
-RUN npm install 
+# Cài đặt các dependencies
+RUN npm ci
 
-# Hiển thị thông tin log khi có lỗi
-RUN ls -al /root/.npm/_logs
-RUN cat /root/.npm/_logs/2023-07-05T13_16_50_733Z-debug-0.log
+# Copy toàn bộ mã nguồn ứng dụng
+COPY . .
 
-# Mở cổng mà ứng dụng sử dụng (nếu có)
-EXPOSE 3000
+# Build ứng dụng React
+RUN npm run build
 
-# Khởi chạy ứng dụng
-CMD ["node", "src/index.js"]
+# Sử dụng base image nginx nhẹ để chạy ứng dụng
+FROM nginx:alpine
+
+# Copy các tệp tin cấu hình của nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copy ứng dụng React đã được build từ stage trước
+COPY --from=builder /app/build /usr/share/nginx/html
+
+# Mở cổng 80 để truy cập ứng dụng
+EXPOSE 80
+
+# Khởi chạy nginx
+CMD ["nginx", "-g", "daemon off;"]
