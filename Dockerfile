@@ -23,10 +23,10 @@ RUN npm run
 FROM nginx:alpine
 
 # Copy các tệp tin cấu hình của nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+#COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy ứng dụng React đã được build từ stage trước
-COPY --from=builder /app/build /usr/share/nginx/html
+#COPY --from=builder /app/build /usr/share/nginx/html
 
 # Mở cổng 80 để truy cập ứng dụng
 EXPOSE 80
