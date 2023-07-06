@@ -17,7 +17,7 @@ RUN npx browserslist@latest --update-db
 COPY . .
 
 # Build ứng dụng React
-RUN npm run build
+RUN npm run 
 
 # Sử dụng base image nginx nhẹ để chạy ứng dụng
 FROM nginx:alpine
